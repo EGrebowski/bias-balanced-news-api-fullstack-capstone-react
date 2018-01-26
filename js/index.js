@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 
 import Header from '../js/components/header';
 import Navigation from '../js/components/navigation';
+import Footer from '../js/components/footer';
 
 
 document.addEventListener('DOMContentLoaded', () =>
@@ -16,3 +17,7 @@ document.addEventListener('DOMContentLoaded', () =>
 document.addEventListener('DOMContentLoaded', () =>
                           {return ReactDOM.render(<Navigation />,
                                                   document.getElementById('reactNavigation'));} );
+
+document.addEventListener('DOMContentLoaded', () =>
+                          {return ReactDOM.render(<Footer />,
+                                                  document.getElementById('reactFooter'));} );
