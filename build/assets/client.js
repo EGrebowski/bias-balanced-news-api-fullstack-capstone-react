@@ -39,6 +39,7 @@ $("nav h3").on("click", function (event) {
 
 //navigate to news section from navbar
 $('#nav-news').on("click", function (event) {
+    console.log("link clicked");
     $(".news").show();
     $('header').hide();
     $('.info-section').hide();
