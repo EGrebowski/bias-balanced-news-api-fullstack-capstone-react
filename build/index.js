@@ -65048,7 +65048,7 @@
 	                null,
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#', id: 'nav-news' },
+	                    { href: '#news', id: 'nav-news' },
 	                    'News'
 	                )
 	            ),
@@ -65057,7 +65057,7 @@
 	                null,
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#', id: 'nav-reading-list' },
+	                    { href: '#articles', id: 'nav-reading-list' },
 	                    'My Articles ',
 	                    _react2.default.createElement('span', { id: 'article-count' })
 	                )
@@ -65067,7 +65067,7 @@
 	                null,
 	                _react2.default.createElement(
 	                    'a',
-	                    { href: '#', id: 'nav-index' },
+	                    { href: '#index', id: 'nav-index' },
 	                    'Index'
 	                )
 	            )

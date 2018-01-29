@@ -9,62 +9,6 @@ function displayError(message) {
     $("#messageBox").fadeOut(10000);
 };
 
-// landing page
-$(document).ready(function (event) {
-    $("#messageBox").hide();
-    $(".news").hide();
-    $(".reading-list-full-page").hide();
-    $(".index").hide();
-    $('#article-count').hide();
-    populateReadingList();
-});
-
-// Get started
-$("#get-started").on("click", function (event) {
-    $(".news").show();
-    $('header').hide();
-    $('.info-section').hide();
-    $(".reading-list-full-page").hide();
-    $(".index").hide();
-});
-
-// Return to landing page
-$("nav h3").on("click", function (event) {
-    $("header").show();
-    $(".info-section").show();
-    $(".news").hide();
-    $(".reading-list-full-page").hide();
-    $(".index").hide();
-});
-
-//navigate to news section from navbar
-$('#nav-news').on("click", function (event) {
-    console.log("link clicked");
-    $(".news").show();
-    $('header').hide();
-    $('.info-section').hide();
-    $(".reading-list-full-page").hide();
-    $(".index").hide();
-});
-
-//navigate to reading list fullpage section from navbar
-$('#nav-reading-list').on("click", function (event) {
-    $(".reading-list-full-page").show();
-    $(".news").hide();
-    $('header').hide();
-    $('.info-section').hide();
-    $(".index").hide();
-});
-
-//navigate to index section from navbar
-$('#nav-index').on("click", function (event) {
-    $(".reading-list-full-page").hide();
-    $(".news").hide();
-    $('header').hide();
-    $('.info-section').hide();
-    $(".index").show();
-});
-
 
 function getHeadlinesBySource(sourceName) {
     $.ajax({
@@ -220,8 +164,94 @@ function refreshNeedle(articles) {
     $('.logo .needle').css('transform', 'rotate(' + needleValue + 'deg)');
 }
 
+
+function buildEmailBodyHtml(articles) {
+    if (articles.length !== 0) {
+        emailBodyHtml += '<p>Below are your articles from Bias Balanced News:</p>';
+        emailBodyHtml += '<br />';
+        emailBodyHtml += '<ul>';
+        $.each(articles, function (index, value) {
+            emailBodyHtml += '<li><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
+            emailBodyHtml += '<p> From ' + value.articleSource + '</p>';
+            emailBodyHtml += '<br />';
+            emailBodyHtml += '</li>';
+        });
+        emailBodyHtml += '</ul>';
+        emailBodyHtml += '<p>For more headlines, check out Bias Balanced News at https://bias-balanced-news.herokuapp.com/.</p>';
+    }
+}
+
+function buildEmailBodyText(articles) {
+    if (articles.length !== 0) {
+        emailBodyText += 'Below are your articles from Bias Balanced News:';
+        $.each(articles, function (index, value) {
+            emailBodyText += value.articleTitle;
+            emailBodyText += value.articleSource;
+            emailBodyText += value.articleUrl;
+        });
+        emailBodyText += 'For more headlines, check out Bias Balanced News at https://egrebowski.github.io/bias-balanced-news-api-fullstack-capstone-react/build/.';
+    }
+}
+
+// landing page
+$(document).ready(function (event) {
+    $("#messageBox").hide();
+    $(".news").hide();
+    $(".reading-list-full-page").hide();
+    $(".index").hide();
+    $('#article-count').hide();
+    populateReadingList();
+});
+
+// Get started
+$(document).on("click", "#get-started", function (event) {
+    console.log("get started");
+    $(".news").show();
+    $('header').hide();
+    $('.info-section').hide();
+    $(".reading-list-full-page").hide();
+    $(".index").hide();
+});
+
+// Return to landing page
+$(document).on("click", "nav h3", function (event) {
+    $("header").show();
+    $(".info-section").show();
+    $(".news").hide();
+    $(".reading-list-full-page").hide();
+    $(".index").hide();
+});
+
+//navigate to news section from navbar
+$(document).on("click", "#nav-news", function (event) {
+    console.log("link clicked");
+    $(".news").show();
+    $('header').hide();
+    $('.info-section').hide();
+    $(".reading-list-full-page").hide();
+    $(".index").hide();
+});
+
+//navigate to reading list fullpage section from navbar
+$(document).on("click", '#nav-reading-list', function (event) {
+    $(".reading-list-full-page").show();
+    $(".news").hide();
+    $('header').hide();
+    $('.info-section').hide();
+    $(".index").hide();
+});
+
+//navigate to index section from navbar
+$(document).on("click", '#nav-index', function (event) {
+    $(".reading-list-full-page").hide();
+    $(".news").hide();
+    $('header').hide();
+    $('.info-section').hide();
+    $(".index").show();
+});
+
 // get headlines with external API
-$("#nav-news").on("click", function (event) {
+$(document).on("click", "#nav-news", function (event) {
     event.preventDefault();
     getHeadlinesBySource("the-new-york-times");
     getHeadlinesBySource("usa-today");
@@ -234,7 +264,7 @@ $("#nav-news").on("click", function (event) {
     getHeadlinesBySource("financial-post");
     //    getHeadlinesBySource("fortune");
 });
-$("#get-started").on("click", function (event) {
+$(document).on("click", "#get-started", function (event) {
     getHeadlinesBySource("the-new-york-times");
     getHeadlinesBySource("usa-today");
     getHeadlinesBySource("fox-news");
@@ -322,36 +352,7 @@ $(document).on('click', '.fa-times', function (event) {
 
 // send reading list email
 
-function buildEmailBodyHtml(articles) {
-    if (articles.length !== 0) {
-        emailBodyHtml += '<p>Below are your articles from Bias Balanced News:</p>';
-        emailBodyHtml += '<br />';
-        emailBodyHtml += '<ul>';
-        $.each(articles, function (index, value) {
-            emailBodyHtml += '<li><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
-            emailBodyHtml += '<p> From ' + value.articleSource + '</p>';
-            emailBodyHtml += '<br />';
-            emailBodyHtml += '</li>';
-        });
-        emailBodyHtml += '</ul>';
-        emailBodyHtml += '<p>For more headlines, check out Bias Balanced News at https://bias-balanced-news.herokuapp.com/.</p>';
-
-    }
-}
-
-function buildEmailBodyText(articles) {
-    if (articles.length !== 0) {
-        emailBodyText += 'Below are your articles from Bias Balanced News:';
-        $.each(articles, function (index, value) {
-            emailBodyText += value.articleTitle;
-            emailBodyText += value.articleSource;
-            emailBodyText += value.articleUrl;
-        });
-        emailBodyText += 'For more headlines, check out Bias Balanced News at https://bias-balanced-news.herokuapp.com/.';
-    }
-}
-
-$(".news .reading-list-sidebar form").on('submit', function (event) {
+$(document).on('submit', ".news .reading-list-sidebar form", function (event) {
     event.preventDefault();
     var emailAddress = $('#email').val();
     if (emailAddress.length === 0) {
@@ -386,7 +387,7 @@ $(".news .reading-list-sidebar form").on('submit', function (event) {
     }
 });
 
-$(".reading-list-full-page form").on('submit', function (event) {
+$(document).on('submit', ".reading-list-full-page form", function (event) {
     event.preventDefault();
     console.log("test");
     var emailAddress = $('#full-page-list-email').val();

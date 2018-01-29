@@ -23,9 +23,9 @@ export default function Navigation(props) {
             </h3>
             <ul className="nav-buttons">
                 <li><a href="https://egrebowski.github.io/bias-balanced-news-api-fullstack-capstone-react/build/">Home</a></li>
-                <li><a href="#" id="nav-news">News</a></li>
-                <li><a href="#" id="nav-reading-list">My Articles <span id="article-count"></span></a></li>
-                <li><a href="#" id="nav-index">Index</a></li>
+                <li><a href="#news" id="nav-news">News</a></li>
+                <li><a href="#articles" id="nav-reading-list">My Articles <span id="article-count"></span></a></li>
+                <li><a href="#index" id="nav-index">Index</a></li>
             </ul>
         </nav>
     )
