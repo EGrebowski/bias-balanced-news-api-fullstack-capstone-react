@@ -21,7 +21,6 @@ function getHeadlinesBySource(sourceName) {
         .done(function (result) {
             // display search results
             displayHeadlinesBySource(sourceName, result.articles);
-            console.log(result);
         })
         // if API call unsuccessful
         .fail(function (jqXHR, error, errorThrown) {
@@ -91,7 +90,6 @@ function populateReadingList() {
             displayReadingListCount(result);
             buildEmailBodyHtml(result);
             refreshNeedle(result);
-            console.log(emailBodyHtml);
         })
         // if API call unsuccessful
         .fail(function (jqXHR, error, errorThrown) {
@@ -111,7 +109,7 @@ function displayReadingList(articles) {
         $('.reading-list-full-page-articles').hide();
     } else {
         $.each(articles, function (index, value) {
-            buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
+            buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a target="_blank" href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
             buildTheHtmlOutput += '<p>' + value.articleSource + '</p>';
             buildTheHtmlOutput += '</div>';
             buildTheHtmlOutput += '<i class="fa fa-times col-1" aria-hidden="true"></i>';
@@ -160,7 +158,6 @@ function refreshNeedle(articles) {
         needleValue = politicalSum / articles.length;
     }
     // set needle
-    console.log(needleValue);
     $('.logo .needle').css('transform', 'rotate(' + needleValue + 'deg)');
 }
 
@@ -205,7 +202,6 @@ $(document).ready(function (event) {
 
 // Get started
 $(document).on("click", "#get-started", function (event) {
-    console.log("get started");
     $(".news").show();
     $('header').hide();
     $('.info-section').hide();
@@ -224,7 +220,6 @@ $(document).on("click", "nav h3", function (event) {
 
 //navigate to news section from navbar
 $(document).on("click", "#nav-news", function (event) {
-    console.log("link clicked");
     $(".news").show();
     $('header').hide();
     $('.info-section').hide();
@@ -262,7 +257,6 @@ $(document).on("click", "#nav-news", function (event) {
     getHeadlinesBySource("the-huffington-post");
     getHeadlinesBySource("politico");
     getHeadlinesBySource("financial-post");
-    //    getHeadlinesBySource("fortune");
 });
 $(document).on("click", "#get-started", function (event) {
     getHeadlinesBySource("the-new-york-times");
@@ -331,7 +325,6 @@ $(document).on('click', '.add', function (event) {
 // delete article from reading list
 $(document).on('click', '.fa-times', function (event) {
     var articleID = $(this).parent().find('.article-id').val();
-    console.log(articleID);
     $.ajax({
             method: 'DELETE',
             url: 'https://bias-balanced-news.herokuapp.com/get-reading-list/' + articleID
