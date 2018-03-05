@@ -39,7 +39,11 @@ function displayHeadlinesBySource(sourceName, data) {
             buildTheHtmlOutput = '<h5>' + dataValue.source.name + '</h5>';
             buildTheHtmlOutput += '<ul class="articles">';
             buildTheHtmlOutput += '<li class="article">';
+            buildTheHtmlOutput += '<div class="image-wrapper">';
+            buildTheHtmlOutput += '<img src="' + dataValue.urlToImage + '">';
+            buildTheHtmlOutput += '</div>';
             buildTheHtmlOutput += '<a class="js-article" target="_blank" href="' + dataValue.url + '">' + dataValue.title + '</a><br />';
+            buildTheHtmlOutput += '<p class="article-description">' + dataValue.description + '</p>';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-title" value="' + dataValue.title + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-url" value="' + dataValue.url + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-source" value="' + dataValue.source.name + '">';
@@ -49,6 +53,7 @@ function displayHeadlinesBySource(sourceName, data) {
         } else if ((dataKey > 0) && (dataKey < 2)) {
             buildTheHtmlOutput += '<li class="article">';
             buildTheHtmlOutput += '<a class="js-article" target="_blank" href="' + dataValue.url + '">' + dataValue.title + '</a><br />';
+            buildTheHtmlOutput += '<p class="article-description">' + dataValue.description + '</p>';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-title" value="' + dataValue.title + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-url" value="' + dataValue.url + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-source" value="' + dataValue.source.name + '">';
@@ -58,6 +63,7 @@ function displayHeadlinesBySource(sourceName, data) {
         } else if (dataKey == 2) {
             buildTheHtmlOutput += '<li class="article">';
             buildTheHtmlOutput += '<a class="js-article" target="_blank" href="' + dataValue.url + '">' + dataValue.title + '</a><br />';
+            buildTheHtmlOutput += '<p class="article-description">' + dataValue.description + '</p>';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-title" value="' + dataValue.title + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-url" value="' + dataValue.url + '">';
             buildTheHtmlOutput += '<input type="hidden" class="add-to-reading-list-source" value="' + dataValue.source.name + '">';
@@ -76,6 +82,7 @@ function displayHeadlinesBySource(sourceName, data) {
         $(this).hide();
     });
 }
+
 
 function populateReadingList() {
     $.ajax({
@@ -109,13 +116,31 @@ function displayReadingList(articles) {
         $('.reading-list-full-page-articles').hide();
     } else {
         $.each(articles, function (index, value) {
-            buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a target="_blank" href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
-            buildTheHtmlOutput += '<p>' + value.articleSource + '</p>';
-            buildTheHtmlOutput += '</div>';
-            buildTheHtmlOutput += '<i class="fa fa-times col-1" aria-hidden="true"></i>';
-            buildTheHtmlOutput += '<input type="hidden" class="article-id" value="' + value._id + '">';
-            buildTheHtmlOutput += '<input type="hidden" class="article-source" value="' + value.articleSource + '">';
-            buildTheHtmlOutput += '</li>';
+            if (value.articleSource === "The New York Times" || value.articleSource === "The Washington Post" || value.articleSource === "MSNBC") {
+                buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
+                buildTheHtmlOutput += '<p class="source-blue">' + value.articleSource + '</p>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '<i class="fa fa-times col-1" aria-hidden="true"></i>';
+                buildTheHtmlOutput += '<input type="hidden" class="article-id" value="' + value._id + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="article-source" value="' + value.articleSource + '">';
+                buildTheHtmlOutput += '</li>';
+            } else if (value.articleSource === "Fox News" || value.articleSource === "The Wall Street Journal" || value.articleSource === "Financial Post") {
+                buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
+                buildTheHtmlOutput += '<p class="source-red">' + value.articleSource + '</p>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '<i class="fa fa-times col-1" aria-hidden="true"></i>';
+                buildTheHtmlOutput += '<input type="hidden" class="article-id" value="' + value._id + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="article-source" value="' + value.articleSource + '">';
+                buildTheHtmlOutput += '</li>';
+            } else {
+                buildTheHtmlOutput += '<li class="col-12"><div class="article-info col-11"><a href="' + value.articleUrl + '">' + value.articleTitle + '</a>';
+                buildTheHtmlOutput += '<p>' + value.articleSource + '</p>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '<i class="fa fa-times col-1" aria-hidden="true"></i>';
+                buildTheHtmlOutput += '<input type="hidden" class="article-id" value="' + value._id + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="article-source" value="' + value.articleSource + '">';
+                buildTheHtmlOutput += '</li>';
+            }
         });
         $(".reading-list-sidebar-articles").html(buildTheHtmlOutput);
         $(".reading-list-full-page-articles").html(buildTheHtmlOutput);
@@ -254,7 +279,7 @@ $(document).on("click", "#nav-news", function (event) {
     getHeadlinesBySource("the-washington-post");
     getHeadlinesBySource("reuters");
     getHeadlinesBySource("the-wall-street-journal");
-    getHeadlinesBySource("the-huffington-post");
+    getHeadlinesBySource("msnbc");
     getHeadlinesBySource("politico");
     getHeadlinesBySource("financial-post");
 });
@@ -265,7 +290,7 @@ $(document).on("click", "#get-started", function (event) {
     getHeadlinesBySource("the-washington-post");
     getHeadlinesBySource("reuters");
     getHeadlinesBySource("the-wall-street-journal");
-    getHeadlinesBySource("the-huffington-post");
+    getHeadlinesBySource("msnbc");
     getHeadlinesBySource("politico");
     getHeadlinesBySource("financial-post");
 });
@@ -289,7 +314,7 @@ $(document).on('click', '.add', function (event) {
         politicalCount = 0;
     } else if (articleSource === "The Wall Street Journal") {
         politicalCount = 60;
-    } else if (articleSource === "The Huffington Post") {
+    } else if (articleSource === "MSNBC") {
         politicalCount = -90;
     } else if (articleSource === "Politico") {
         politicalCount = -10;

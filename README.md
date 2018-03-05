@@ -38,7 +38,7 @@ This app allows viewers to compare headlines across different news sites. Users 
 You can access a working prototype of the Node app at [https://bias-balanced-news.herokuapp.com/](https://bias-balanced-news.herokuapp.com/) and the React app here https://egrebowski.github.io/bias-balanced-news-api-fullstack-capstone-react/build
 
 ## Technical
-This app is built using HTML, CSS, JavaScript, jQuery, and Node.js.
+This app is built using HTML, CSS, JavaScript, jQuery, Node.js, and React.
 
 Usernames and encrypted passwords (encrypted using salted hashing with [bcrypt.js](https://www.npmjs.com/package/bcryptjs)) are stored and accessed from an [mLab](https://mlab.com) database.
 
