@@ -72,18 +72,17 @@
 	
 	var render = _reactDom2.default.render;
 	
-	// import '../assets/css/main.css';
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	                        return _reactDom2.default.render(_react2.default.createElement(_header2.default, null), document.getElementById('reactHeader'));
+	  return _reactDom2.default.render(_react2.default.createElement(_header2.default, null), document.getElementById('reactHeader'));
 	});
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	                        return _reactDom2.default.render(_react2.default.createElement(_navigation2.default, null), document.getElementById('reactNavigation'));
+	  return _reactDom2.default.render(_react2.default.createElement(_navigation2.default, null), document.getElementById('reactNavigation'));
 	});
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	                        return _reactDom2.default.render(_react2.default.createElement(_footer2.default, null), document.getElementById('reactFooter'));
+	  return _reactDom2.default.render(_react2.default.createElement(_footer2.default, null), document.getElementById('reactFooter'));
 	});
 
 /***/ }),
@@ -65149,6 +65148,15 @@
 	                    'a',
 	                    { href: 'mailto:ellie.grebowski@gmail.com', title: 'Send me an email' },
 	                    'Email'
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                    'p',
+	                    { id: 'attribution' },
+	                    'Powered by News API'
 	                )
 	            )
 	        )

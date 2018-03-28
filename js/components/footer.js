@@ -13,12 +13,11 @@ export default function Footer(props) {
     return (
         <footer role="contentinfo">
             <ul>
-                <li>
-                <p>2018 Ellie Grebowski</p>
-                </li>
+                <li><p>2018 Ellie Grebowski</p></li>
                 <li><a href="https://github.com/EGrebowski">GitHub</a></li>
                 <li><a href="#">LinkedIn</a></li>
                 <li><a href="mailto:ellie.grebowski@gmail.com" title="Send me an email">Email</a></li>
+                <li><p id="attribution">Powered by News API</p></li>
             </ul>
         </footer>
     )
