@@ -6,5 +6,5 @@ import Navigation from './navigation';
 describe('<Navigation />', () => {
     it('Renders without crashing', () => {
         shallow(<Navigation />);
-                });
     });
+});
